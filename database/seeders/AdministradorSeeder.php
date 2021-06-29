@@ -16,7 +16,7 @@ class AdministradorSeeder extends Seeder
     {
         //
         DB::table('administradors')->insert([
-            'nombre' => 'Christian',
+            'nombre' => 'Saul',
             'apellido' => 'Mascorro',
             'nss' => 'BAMC010203',
             'sexo' => 'Masculino',

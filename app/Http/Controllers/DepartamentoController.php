@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Departamento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
+use Illuminate\Support\Facades\Auth;
 
 class DepartamentoController extends Controller
 {
@@ -16,7 +18,9 @@ class DepartamentoController extends Controller
      */
     public function index()
     {
-        //
+        //solo ver los de un usuario
+        //$departamentos = Auth::user()->departamentos;
+
         $departamentos = Departamento::all();
         return view('departamento.departamentoindex', compact('departamentos'));
     }
@@ -41,6 +45,13 @@ class DepartamentoController extends Controller
     public function store(Request $request)
     {
         //
+
+        $request->validate([
+            'nombre'=>['required', 'string', 'min:3', 'max:50', 'unique:App\Models\Departamento,nombre'],
+            'descripcion'=>['required', 'string', 'min:10', 'max:255'],
+        ]);
+
+        $request->merge(['user_id'=>$request->user()->id]);
         $departamento = new Departamento($request->all());
         $departamento->save();
         
@@ -85,9 +96,15 @@ class DepartamentoController extends Controller
     {
         //
         //Departamento::where('id', $departamento->id)->update($request->except('_token', '_method'));
+        $request->validate([
+            'nombre'=>['required', 'string', 'min:3', 'max:50', Rule::unique('departamentos')->ignore($departamento->id)],
+            'descripcion'=>['required', 'string', 'min:20', 'max:255'],
+        ]);
+
         $departamento->nombre = $request->nombre;
         $departamento->descripcion = $request->descripcion;
         $departamento->save();
+
         return redirect()->route('departamento.show', $departamento);
     }
 

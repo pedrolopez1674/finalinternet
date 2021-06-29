@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DepartamentoController;
+use App\Http\Controllers\EmpleadoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,4 +22,11 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::resource('departamento', DepartamentoController::class);
+Route::resource('departamento', DepartamentoController::class)->middleware('auth');
+
+Route::resource('empleado', EmpleadoController::class)->middleware('auth');
+
+
+Route::get('/paper', function () {
+    return view('layouts.paper');
+});
