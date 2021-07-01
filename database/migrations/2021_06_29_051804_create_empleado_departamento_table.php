@@ -13,7 +13,7 @@ class CreateEmpleadoDepartamentoTable extends Migration
      */
     public function up()
     {
-        Schema::create('empleado_departamento', function (Blueprint $table) {
+        Schema::create('departamento_empleado', function (Blueprint $table) {
             $table->foreignId('departamento_id')->constrained();
             $table->unsignedBigInteger('empleado_id');
             $table->foreign('empleado_id')->references('id')->on('empleados')->onDelete('cascade');
@@ -27,6 +27,6 @@ class CreateEmpleadoDepartamentoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('empleado_departamento');
+        Schema::dropIfExists('departamento_empleado');
     }
 }

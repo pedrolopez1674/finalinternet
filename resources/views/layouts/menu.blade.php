@@ -15,7 +15,7 @@
             </a>
           </li>
           <li>
-            <a href="javascript:;">
+            <a href="{{ route('supervisor.index') }}">
               <i class="fa fa-user" aria-hidden="true"></i>
               <p>Jefes de departamente</p>
             </a>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Departamento;
+use App\Models\Empleado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
@@ -68,7 +69,9 @@ class DepartamentoController extends Controller
     public function show(Departamento $departamento)
     {
         //
-        return view('departamento.departamentoshow', compact('departamento'));
+        $empleados = Empleado::get();
+
+        return view('departamento.departamentoshow', compact('departamento', 'empleados'));
 
     }
 
@@ -119,5 +122,14 @@ class DepartamentoController extends Controller
         //
         $departamento->delete();
         return redirect()->route('departamento.index');
+    }
+
+    public function agregaEmpleado(Request $request){
+        DB::table('empleado_departamento')->insert([
+            'empleado_id'=> $request->empleado_id,
+            'departamento_id'=> $request->departamento_id,
+        ]);
+
+        return redirect()->route('departamento.show', $request->departamento_id);
     }
 }

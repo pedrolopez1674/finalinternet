@@ -64,13 +64,42 @@
 
 
  <div class="col-md-12">
+  <div class="col-md-6">
+    <div class="card card-plain">
+              <div class="card-header">
+                <h4 class="card-title">Empleados del Departamento</h4>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead class=" text-primary">
+                    
+                      <th>
+                        NOMBRE
+                      </th>
+                    
+                    </thead>
+                    <tbody>
+                      @foreach( $departamento->empleados as $empleado)
+
+                      <tr>
+                        <td>{{$empleado->nombre}}</td>
+                      </tr>
+                      @endforeach
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+  </div>
+  <div class="col-md-6">
     <div class="card card-user">
       <div class="card-header">
         <h5 class="card-title">Agregar empleado a departamento</h5>
       </div>
       <div class="card-body">
        
-      <form action="{{ route('departamento.store') }}" method="POST">
+      <form action="{{ route('departamento.agrega-empleado') }}" method="POST">
  
     @csrf
           <div class="row">
@@ -78,9 +107,11 @@
               <div class="form-group">
                 <label>Nombre</label>
                 <select class="form-control" name="empleado_id">
-                  @foreach ()
-                  <option value="">a</option>
+                  @foreach ($empleados as $empleado)
+                  <option value="{{$empleado->id}}">{{$empleado->nombre}} {{$empleado->apellido}} - Turno {{$empleado->turno}}</option>
+                  @endforeach
                 </select>
+                <input type="hidden" name="departamento_id" value="{{ $departamento->id }}">
                 
               </div>
             </div>
@@ -98,6 +129,7 @@
         </form>
       </div>
     </div>
+  </div>
   </div>
 
 @endsection

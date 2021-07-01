@@ -1,7 +1,10 @@
+
+
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+            <!--x-jet-authentication-card-logo /-->
+            <img src="{{asset('img/logo.png')}}">
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />
@@ -11,8 +14,8 @@
                 {{ session('status') }}
             </div>
         @endif
-
-<h3 style="text-align: center;">Inicia sesion con tu cuenta de administrador, jefe de departamento o empleado</h3>
+<h1 style="text-align: center;">SISTEMA GESTOR EMPRESARIAL<br></h1>
+<h3 style="text-align: center;">Inicia sesion con tu cuenta de administrador</h3>
 
 
         <form method="POST" action="{{ route('login') }}">

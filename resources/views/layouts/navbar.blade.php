@@ -38,7 +38,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                   @auth
-                  <a class="dropdown-item" href="#">Ver perfil</a>
+                  <!--a class="dropdown-item" href="#">Ver perfil</a-->
 
                   <form method="POST" action="{{route('logout')}}">
                     @csrf

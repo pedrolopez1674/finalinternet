@@ -16,7 +16,7 @@ class AdministradorSeeder extends Seeder
     {
         //
         DB::table('administradors')->insert([
-            'nombre' => 'Saul',
+            'nombre' => 'Christian',
             'apellido' => 'Mascorro',
             'nss' => 'BAMC010203',
             'sexo' => 'Masculino',
@@ -38,11 +38,13 @@ class AdministradorSeeder extends Seeder
             'name' => 'Christian',
             'email' => 'christian@empresa.com',
             'password' => bcrypt('12345678'),
+            'tipo' => 0,
         ]);
        	DB::table('users')->insert([
             'name' => 'Pedro',
             'email' => 'pedro@empresa.com',
             'password' => bcrypt('12345678'),
+            'tipo' => 0,
         ]);
     }
 }
