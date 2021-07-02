@@ -1,3 +1,20 @@
+<p>
+Nombre del proyecto - Gestor empresarial <br>
+Descripción del objetivo del proyecto - Poder generar un sistema capaz de organizar internamente la logística de la empresa <br>
+Integrantes - Pedro López y Christian Balleza<br>
+Instrucciones de instalación - Generar solo mente los seeders de administrador, supervisor, empleado, departamento <br>
+php artisan db::seed --class = AdministradorSeeder<br>
+php artisan db::seed --class = SupervisorSeeder<br>
+php artisan db::seed --class = EmpleadoSeeder<br>
+php artisan db::seed --class = DepartamentoSeeder<br>
+
+    y ejecutar las migraciones.<br>
+Nota: Los usuarios administradores son únicos no son creados por los usuarios y accediendo a estos podemos crear otras cuenta como supervisor que con estás permite acceder<br>
+    para ello puede agregar un usuario en el seeder de administradorSeeder, o usar los accesos predefinidos que son user: pedro@empresa.com pass: 12345678 o user: christian@empresa.com pass: 12345678<br>
+    tambien existen supervisores predefinidos o los puede agregar desde el sistea entrando como administrador, un sepervisor registrado es juan@empresa.com pass: 12345678
+</p>
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
