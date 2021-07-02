@@ -26,6 +26,12 @@
               <p>Empleados</p>
             </a>
           </li>
+          <li>
+            <a href="{{ route('archivo.index') }}">
+              <i class="fa fa-picture-o" aria-hidden="true"></i>
+              <p>Empleados</p>
+            </a>
+          </li>
         </ul>
       </div>
     </div>

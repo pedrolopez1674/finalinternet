@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DepartamentoController;
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\SupervisorController;
+use App\Http\Controllers\ArchivoController;
 
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
@@ -54,7 +55,14 @@ Route::resource('empleado', EmpleadoController::class)->middleware('auth');
 
 Route::resource('supervisor', SupervisorController::class)->middleware('auth');
 
+Route::resource('archivo', ArchivoController::class)->middleware('auth');
+Route::get('archivo/descarga/{archivo}', [ArchivoController::class, 'descarga'])->name('archivo.descarga');
+
 
 Route::get('/paper', function () {
     return view('layouts.paper');
+});
+
+Route::get('/home', function () {
+    return view('layouts.home');
 });

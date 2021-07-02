@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class SupervisorController extends Controller
 {
@@ -32,6 +33,10 @@ class SupervisorController extends Controller
     public function create()
     {
         //
+        if(!Gate::allows('administrador')){
+            abort(403);
+        }
+
         return view('supervisor.supervisorform');
     }
 
@@ -44,6 +49,9 @@ class SupervisorController extends Controller
     public function store(Request $request)
     {
         //
+        if(!Gate::allows('administrador')){
+            abort(403);
+        }
         $request->validate([
             'nombre'=>['required', 'string', 'min:3', 'max:50'],
             'correo'=>['required', 'string', 'min:3', 'max:255'],
@@ -87,6 +95,9 @@ class SupervisorController extends Controller
     public function edit(Supervisor $supervisor)
     {
         //
+        if(!Gate::allows('administrador')){
+            abort(403);
+        }
         return view('supervisor.supervisorform', compact('supervisor'));
     }
 
@@ -100,6 +111,10 @@ class SupervisorController extends Controller
     public function update(Request $request, Supervisor $supervisor)
     {
         //
+        if(!Gate::allows('administrador')){
+            abort(403);
+        }
+
         $request->validate([
             'nombre'=>['required', 'string', 'min:3', 'max:50'],
             'correo'=>['required', 'string', 'min:3', 'max:255'],
@@ -126,6 +141,9 @@ class SupervisorController extends Controller
     public function destroy(Supervisor $supervisor)
     {
         //
+        if(!Gate::allows('administrador')){
+            abort(403);
+        }
         $supervisor->delete();
         return redirect()->route('supervisor.index');
     }

@@ -49,7 +49,7 @@
                 <form action="{{ route('supervisor.destroy',$supervisor) }}" method="POST">
 					@csrf
 					@method('DELETE')
-					<center><button type="submit" class="btn btn-primary btn-round" style="background-color: red;">Eliminar Empleado</button></center>
+					@cannot('delete')<center><button type="submit" class="btn btn-primary btn-round" style="background-color: red;">Eliminar Empleado</button></center>@endcannot
 					
 
 				</form>

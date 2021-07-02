@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class EmpleadoController extends Controller
 {
@@ -32,6 +33,9 @@ class EmpleadoController extends Controller
     public function create()
     {
         //
+        if(!Gate::allows('administrador')){
+            abort(403);
+        }
         return view('empleado.empleadoform');
     }
 
@@ -44,6 +48,9 @@ class EmpleadoController extends Controller
     public function store(Request $request)
     {
         //
+        if(!Gate::allows('administrador')){
+            abort(403);
+        }
         $request->validate([
             'nombre'=>['required', 'string', 'min:3', 'max:50'],
             'apellido'=>['required', 'string', 'min:3', 'max:255'],
@@ -78,6 +85,9 @@ class EmpleadoController extends Controller
     public function edit(Empleado $empleado)
     {
         //
+        if(!Gate::allows('administrador')){
+            abort(403);
+        }
         return view('empleado.empleadoform', compact('empleado'));
     }
 
@@ -91,6 +101,9 @@ class EmpleadoController extends Controller
     public function update(Request $request, Empleado $empleado)
     {
         //
+        if(!Gate::allows('administrador')){
+            abort(403);
+        }
         $request->validate([
             'nombre'=>['required', 'string', 'min:3', 'max:50'],
             'apellido'=>['required', 'string', 'min:3', 'max:255'],
@@ -116,6 +129,9 @@ class EmpleadoController extends Controller
     public function destroy(Empleado $empleado)
     {
         //
+        if(!Gate::allows('administrador')){
+            abort(403);
+        }
         $empleado->delete();
         return redirect()->route('empleado.index');
     }

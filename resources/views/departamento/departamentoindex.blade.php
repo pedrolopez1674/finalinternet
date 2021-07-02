@@ -4,6 +4,7 @@
 
 <div class="row col-md-12">
     <div class="col-md-6">
+      
 		<h3 class="description">Listado de departamentos</h3>
 	</div>
 	<div class="col-md-6">

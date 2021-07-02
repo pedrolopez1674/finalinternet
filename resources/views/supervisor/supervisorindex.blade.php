@@ -6,9 +6,11 @@
     <div class="col-md-6">
 		<h3 class="description">Listado de supervisores</h3>
 	</div>
+  @cannot('create')
 	<div class="col-md-6">
 		<a href="{{ route('supervisor.create') }}" style="float:right; "><button type="submit" class="btn btn-primary btn-round" style="margin-top: 0px;">Agregar supervisor</button></a>
 	</div>
+  @endcannot
 </div>
 
 

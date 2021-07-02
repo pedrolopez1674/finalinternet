@@ -12,7 +12,7 @@
               <span class="copyright">
                 © <script>
                   document.write(new Date().getFullYear())
-                </script>, Software desarrollado por Pedro Lopez & Chirstian Balleza
+                </script>, Software desarrollado por Pedro Lopez Sierra & Christian Balleza Mascorro
               </span>
             </div>
           </div>

@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Departamento;
 use App\Models\Empleado;
+use App\Models\User;
+use App\Policies\DepartamentoPolicy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class DepartamentoController extends Controller
 {
@@ -19,10 +22,11 @@ class DepartamentoController extends Controller
      */
     public function index()
     {
-        //solo ver los de un usuario
-        //$departamentos = Auth::user()->departamentos;
 
-        $departamentos = Departamento::all();
+        //solo ver los de un usuario
+        //$departamentos = Auth::user()->departamentos()->with('user')->get();
+        //$departamentos = Departamento::all();
+        $departamentos = Departamento::with('user')->get();
         return view('departamento.departamentoindex', compact('departamentos'));
     }
 
@@ -34,6 +38,10 @@ class DepartamentoController extends Controller
     public function create()
     {
         //
+        
+        if(!Gate::allows('administrador')){
+            abort(403);
+        }
         return view('departamento.departamentoform');
     }
 
@@ -46,6 +54,10 @@ class DepartamentoController extends Controller
     public function store(Request $request)
     {
         //
+        if(!Gate::allows('administrador')){
+            abort(403);
+        }
+
 
         $request->validate([
             'nombre'=>['required', 'string', 'min:3', 'max:50', 'unique:App\Models\Departamento,nombre'],
@@ -69,6 +81,8 @@ class DepartamentoController extends Controller
     public function show(Departamento $departamento)
     {
         //
+        $this->authorize('view', $departamento);
+
         $empleados = Empleado::get();
 
         return view('departamento.departamentoshow', compact('departamento', 'empleados'));
@@ -84,6 +98,9 @@ class DepartamentoController extends Controller
     public function edit(Departamento $departamento)
     {
         //
+        if(!Gate::allows('administrador')){
+            abort(403);
+        }
         return view('departamento.departamentoform', compact('departamento'));
 
     }
@@ -98,6 +115,9 @@ class DepartamentoController extends Controller
     public function update(Request $request, Departamento $departamento)
     {
         //
+        if(!Gate::allows('administrador')){
+            abort(403);
+        }
         //Departamento::where('id', $departamento->id)->update($request->except('_token', '_method'));
         $request->validate([
             'nombre'=>['required', 'string', 'min:3', 'max:50', Rule::unique('departamentos')->ignore($departamento->id)],
@@ -119,13 +139,21 @@ class DepartamentoController extends Controller
      */
     public function destroy(Departamento $departamento)
     {
+         if(!Gate::allows('administrador')){
+            abort(403);
+        }
         //
         $departamento->delete();
         return redirect()->route('departamento.index');
     }
 
     public function agregaEmpleado(Request $request){
-        DB::table('empleado_departamento')->insert([
+
+        if(!Gate::allows('administrador')){
+            abort(403);
+        }
+
+        DB::table('departamento_empleado')->insert([
             'empleado_id'=> $request->empleado_id,
             'departamento_id'=> $request->departamento_id,
         ]);
